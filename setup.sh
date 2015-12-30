@@ -4,6 +4,7 @@ set -e
 set -o pipefail
 
 CURRENT_PROJECT_DIR=$PWD
+FLASK_DIR_NAME=flask
 
 cd "$CURRENT_PROJECT_DIR"
 
@@ -17,11 +18,13 @@ then
     echo "> Installation successful"
 fi
 
+rm -rf "$FLASK_DIR_NAME"
+
 echo "> Creating virtualenv..."
-virtualenv venv
+virtualenv $FLASK_DIR_NAME
 
 echo "> Activating virtualenv..."
-. venv/bin/activate || echo "> Failed to activate virtualenv" exit -1
+source $FLASK_DIR_NAME/bin/activate || echo "> Failed to activate virtualenv" exit -1
 
 echo "> Installing Flask framework for current user only"
 pip install Flask
